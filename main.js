@@ -1,0 +1,43 @@
+const form = document.getElementById('form-deposito');
+const nomeBenefiriario = document.getElementById('nome-beneficiario');
+let formEValido = false;
+
+function validaNome(nomeCompleto) {
+    const nomeComoArray = nomeCompleto.split(' ');
+    return nomeComoArray.length >= 2;
+}
+
+form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const numeroContaBeneficiario = document.getElementById('numero-conta');
+    const valorDeposito = document.getElementById('valor-deposito');
+    const mensagemSucesso = `Montante de: <b>${valorDeposito.value}</b> depoistado para o cliente: <b>${nomeBenefiriario.value}</b> - conta: <b>${numeroContaBeneficiario.value}</b>`;
+
+    formEValido = validaNome(nomeBenefiriario.value)
+    if (formEValido) {
+        const containerMensagemSucesso = document.querySelector('.sucess-message');
+        containerMensagemSucesso.innerHTML = mensagemSucesso;
+        containerMensagemSucesso.style.display = 'block';
+
+        nomeBenefiriario.value = '';
+        numeroContaBeneficiario.value = '';
+        valorDeposito.value = '';
+    } else {
+        nomeBenefiriario.style.border = '1px solid red';
+        document.querySelector('.error-message').style.display = 'block';
+    }
+})
+
+nomeBenefiriario.addEventListener('keyup', function(e) {
+    console.log(e.target.value);
+    formEValido = validaNome(e.target.value);
+
+    if (!formEValido) {
+        nomeBenefiriario.classList.add('error');
+        document.querySelector('error-message').style.display = 'block';
+    } else {
+        nomeBenefiriario.classList.remove('error');
+        document.querySelector('error-message').style.display = 'none';
+    }
+});
