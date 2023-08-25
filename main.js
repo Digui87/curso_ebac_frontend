@@ -1,5 +1,5 @@
 const form = document.getElementById('form-deposito');
-const nomeBenefiriario = document.getElementById('nome-beneficiario');
+const nomeBeneficiario = document.getElementById('nome-beneficiario');
 let formEValido = false;
 
 function validaNome(nomeCompleto) {
@@ -12,32 +12,31 @@ form.addEventListener('submit', function(e) {
 
     const numeroContaBeneficiario = document.getElementById('numero-conta');
     const valorDeposito = document.getElementById('valor-deposito');
-    const mensagemSucesso = `Montante de: <b>${valorDeposito.value}</b> depoistado para o cliente: <b>${nomeBenefiriario.value}</b> - conta: <b>${numeroContaBeneficiario.value}</b>`;
+    const mensagemSucesso = `Montante de: <b>${valorDeposito.value}</b> depoistado para o cliente: <b>${nomeBeneficiario.value}</b> - conta: <b>${numeroContaBeneficiario.value}</b>`;
 
-    formEValido = validaNome(nomeBenefiriario.value)
+    formEValido = validaNome(nomeBeneficiario.value)
     if (formEValido) {
         const containerMensagemSucesso = document.querySelector('.sucess-message');
         containerMensagemSucesso.innerHTML = mensagemSucesso;
         containerMensagemSucesso.style.display = 'block';
 
-        nomeBenefiriario.value = '';
+        nomeBeneficiario.value = '';
         numeroContaBeneficiario.value = '';
         valorDeposito.value = '';
     } else {
-        nomeBenefiriario.style.border = '1px solid red';
+        nomeBeneficiario.style.border = '1px solid red';
         document.querySelector('.error-message').style.display = 'block';
     }
-})
+});
 
-nomeBenefiriario.addEventListener('keyup', function(e) {
-    console.log(e.target.value);
+nomeBeneficiario.addEventListener('keyup', function(e) {
     formEValido = validaNome(e.target.value);
 
     if (!formEValido) {
-        nomeBenefiriario.classList.add('error');
-        document.querySelector('error-message').style.display = 'block';
+        nomeBeneficiario.classList.add('error');
+        document.querySelector('.error-message').style.display = 'block';
     } else {
-        nomeBenefiriario.classList.remove('error');
-        document.querySelector('error-message').style.display = 'none';
+        nomeBeneficiario.classList.remove('error');
+        document.querySelector('.error-message').style.display = 'none';
     }
 });
